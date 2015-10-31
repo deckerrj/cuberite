@@ -85,6 +85,17 @@ public:
 		int a_MaxStructureSizeX, int a_MaxStructureSizeZ,
 		size_t a_MaxCacheSize
 	);
+
+	/** Creates a new instance that has the generation parameters set to defaults.
+	This is used for instances that are later loaded from a file. */
+	cGridStructGen(int a_Seed);
+
+	/** Sets the generator params based on the dictionary passed in.
+	Note that this must not be called anymore after generating a chunk. */
+	void SetGeneratorParams(const AStringMap & a_GeneratorParams);
+
+	// cFinishGen override:
+	virtual void GenFinish(cChunkDesc & a_ChunkDesc) override;
 	
 protected:
 	/** Seed for generating grid offsets and also available for descendants. */
@@ -131,9 +142,6 @@ protected:
 	around their gridpoint intersects the chunk. */
 	void GetStructuresForChunk(int a_ChunkX, int a_ChunkZ, cStructurePtrs & a_Structures);
 
-	// cFinishGen overrides:
-	virtual void GenFinish(cChunkDesc & a_ChunkDesc) override;
-	
 	// Functions for the descendants to override:
 	/** Create a new structure at the specified gridpoint */
 	virtual cStructurePtr CreateStructure(int a_GridX, int a_GridZ, int a_OriginX, int a_OriginZ) = 0;

@@ -9,7 +9,7 @@ include_directories (SYSTEM "${CMAKE_CURRENT_SOURCE_DIR}/../lib/libevent/include
 
 set(FOLDERS
 	OSSupport HTTPServer Items Blocks Protocol Generating PolarSSL++ Bindings
-	WorldStorage Mobs Entities Simulator BlockEntities UI Generating/Prefabs
+	WorldStorage Mobs Entities Simulator BlockEntities UI
 	Noise
 )
 
@@ -145,6 +145,7 @@ SET (HDRS
 	SettingsRepositoryInterface.h
 	SpawnPrepare.h
 	Statistics.h
+	Stopwatch.h
 	StringCompression.h
 	StringUtils.h
 	Tracer.h
@@ -363,7 +364,7 @@ endif ()
 if (NOT MSVC)
 	target_link_libraries(${EXECUTABLE}
 		OSSupport HTTPServer Bindings Items Blocks Noise
-		Protocol Generating Generating_Prefabs WorldStorage
+		Protocol Generating WorldStorage
 		Mobs Entities Simulator BlockEntities UI PolarSSL++
 	)
 endif ()
