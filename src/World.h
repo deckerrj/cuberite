@@ -628,6 +628,9 @@ public:
 	/** Returns the name of the world.ini file used by this world */
 	const AString & GetIniFileName(void) const {return m_IniFileName; }
 
+	/** Returns the world resource pack url */
+	const AString & GetResourcePackURL(void) const { return m_ResourcePackURL; }
+
 	/** Returns the associated scoreboard instance. */
 	cScoreboard & GetScoreBoard(void) { return m_Scoreboard; }
 
@@ -862,6 +865,7 @@ private:
 	AString m_LinkedOverworldName;
 
 	AString m_IniFileName;
+	AString m_ResourcePackURL;
 	
 	/** Name of the storage schema used to load and save chunks */
 	AString m_StorageSchema;

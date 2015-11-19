@@ -435,6 +435,8 @@ void cWorld::Start(void)
 	m_BroadcastDeathMessages = IniFile.GetValueSetB("Broadcasting", "BroadcastDeathMessages", true);
 	m_BroadcastAchievementMessages = IniFile.GetValueSetB("Broadcasting", "BroadcastAchievementMessages", true);
 
+	m_ResourcePackURL = IniFile.GetValueSet("General", "ResourcePack", "");
+
 	SetMaxViewDistance(IniFile.GetValueSetI("SpawnPosition", "MaxViewDistance", 12));
 
 	// Try to find the "SpawnPosition" key and coord values in the world configuration, set the flag if found

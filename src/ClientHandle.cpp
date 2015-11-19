@@ -347,6 +347,11 @@ void cClientHandle::Authenticate(const AString & a_Name, const AString & a_UUID,
 		m_Player->LoginSetGameMode(World->GetGameMode());
 	}
 
+	if (World->GetResourcePackURL() != "")
+	{
+		m_Protocol->SendResourcePackURL(World->GetResourcePackURL());
+	}
+
 	m_Player->SetIP (m_IPString);
 
 	if (!cRoot::Get()->GetPluginManager()->CallHookPlayerJoined(*m_Player))

@@ -1069,6 +1069,19 @@ void cProtocol180::SendResetTitle(void)
 
 
 
+void cProtocol180::SendResourcePackURL(const AString & a_ResourcePackURL)
+{
+	ASSERT(m_State == 3); // In game mode?
+
+	cPacketizer Pkt(*this, 0x48);  // Resource Pack packet
+        Pkt.WriteString(a_ResourcePackURL);
+	Pkt.WriteString("0000000000000000000000000000000000000000");
+}
+
+
+
+
+
 void cProtocol180::SendRespawn(eDimension a_Dimension, bool a_ShouldIgnoreDimensionChecks)
 {
 	if ((m_LastSentDimension == a_Dimension) && !a_ShouldIgnoreDimensionChecks)
@@ -2026,6 +2039,7 @@ bool cProtocol180::HandlePacket(cByteBuffer & a_ByteBuffer, UInt32 a_PacketType)
 				case 0x15: HandlePacketClientSettings         (a_ByteBuffer); return true;
 				case 0x16: HandlePacketClientStatus           (a_ByteBuffer); return true;
 				case 0x17: HandlePacketPluginMessage          (a_ByteBuffer); return true;
+				case 0x19: HandlePacketResourcePackStatus     (a_ByteBuffer); return true;
 			}
 			break;
 		}
@@ -2468,6 +2482,17 @@ void cProtocol180::HandlePacketPluginMessage(cByteBuffer & a_ByteBuffer)
 	VERIFY(a_ByteBuffer.ReadString(Data, a_ByteBuffer.GetReadableSpace() - 1));  // Always succeeds
 	m_Client->HandlePluginMessage(Channel, Data);
 }
+
+
+
+
+
+void cProtocol180::HandlePacketResourcePackStatus(cByteBuffer & a_ByteBuffer)
+{
+	HANDLE_READ(a_ByteBuffer, ReadVarUTF8String, AString, Hash);
+	HANDLE_READ(a_ByteBuffer, ReadVarInt, UInt32, Status);
+}
+
 
 
 
