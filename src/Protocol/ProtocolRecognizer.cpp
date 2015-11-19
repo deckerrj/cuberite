@@ -599,6 +599,17 @@ void cProtocolRecognizer::SendResetTitle(void)
 
 
 
+void cProtocolRecognizer::SendResourcePack(const AString & a_ResourcePackURL, const AString & a_ResourcePackHash)
+{
+	ASSERT(m_Protocol != nullptr);
+	m_Protocol->SendResourcePack(a_ResourcePackURL, a_ResourcePackHash);
+}
+
+
+
+
+
+
 void cProtocolRecognizer::SendRespawn(eDimension a_Dimension, bool a_ShouldIgnoreDimensionChecks)
 {
 	ASSERT(m_Protocol != nullptr);

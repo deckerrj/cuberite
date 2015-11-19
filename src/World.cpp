@@ -131,6 +131,8 @@ cWorld::cWorld(const AString & a_WorldName, eDimension a_Dimension, const AStrin
 	m_WorldName(a_WorldName),
 	m_LinkedOverworldName(a_LinkedOverworldName),
 	m_IniFileName(m_WorldName + "/world.ini"),
+	m_ResourcePackURL(""),
+	m_ResourcePackHash(""),
 	m_StorageSchema("Default"),
 #ifdef __arm__
 	m_StorageCompressionFactor(0),
@@ -434,6 +436,9 @@ void cWorld::Start(void)
 
 	m_BroadcastDeathMessages = IniFile.GetValueSetB("Broadcasting", "BroadcastDeathMessages", true);
 	m_BroadcastAchievementMessages = IniFile.GetValueSetB("Broadcasting", "BroadcastAchievementMessages", true);
+
+	m_ResourcePackURL = IniFile.GetValueSet("General", "ResourcePack");
+	m_ResourcePackHash = StrToLower(IniFile.GetValueSet("General", "ResourcePackHash"));
 
 	SetMaxViewDistance(IniFile.GetValueSetI("SpawnPosition", "MaxViewDistance", 12));
 

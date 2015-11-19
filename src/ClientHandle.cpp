@@ -1904,6 +1904,10 @@ void cClientHandle::Tick(float a_Dt)
 	if (m_HasSentPlayerChunk && (m_State == csDownloadingWorld))
 	{
 		m_Protocol->SendPlayerMoveLook();
+		if (m_Player->GetWorld()->GetResourcePackURL() != "")
+		{
+			m_Protocol->SendResourcePack(m_Player->GetWorld()->GetResourcePackURL(), m_Player->GetWorld()->GetResourcePackHash());
+		}
 		m_State = csPlaying;
 	}
 

@@ -1011,6 +1011,19 @@ void cProtocol172::SendResetTitle(void)
 
 
 
+void cProtocol172::SendResourcePack(const AString & a_ResourcePackURL, const AString & a_ResourcePackHash)
+{
+	ASSERT(m_State == 3);  // In game mode?
+
+	cPacketizer Pkt(*this, 0x48);  // Resource Pack packet
+	Pkt.WriteString(a_ResourcePackURL);
+	Pkt.WriteString(a_ResourcePackHash);
+}
+
+
+
+
+
 void cProtocol172::SendRespawn(eDimension a_Dimension, bool a_ShouldIgnoreDimensionChecks)
 {
 	if ((m_LastSentDimension == a_Dimension) && !a_ShouldIgnoreDimensionChecks)
